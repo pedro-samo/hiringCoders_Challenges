@@ -8,29 +8,29 @@ const uglify = require('gulp-uglify');
 
 function sassCompilation() {
   return gulp
-  .src('styles/*.scss')
+  .src('src/style/*.scss')
   .pipe(sass({outputStyle: 'compressed'}))
   .pipe(autoprefixer({
     browsers: ['last 2 versions'],
     cascade: false
   }))
-  .pipe(gulp.dest('build/'))
+  .pipe(gulp.dest('dist/'))
 }
 
 function gulpJs() {
   return gulp
-  .src('js/home/*.js')
-  .pipe(concat('VapeStore-home.js'))
+  .src('src/js/*.js')
+  .pipe(concat('Newsletter-home.js'))
   .pipe(babel({
     presets: ['@babel/env']
   }))
   .pipe(uglify())
-  .pipe(gulp.dest('build/'))
+  .pipe(gulp.dest('dist/'))
 }
 
 function gulpWatch() {
-  gulp.watch('styles/**/*.scss', sassCompilation)
-  gulp.watch('js/**/*.js', gulpJs)
+  gulp.watch('src/style/*.scss', sassCompilation)
+  gulp.watch('src/js/*.js', gulpJs)
 }
 
 exports.sassCompilation = sassCompilation;
